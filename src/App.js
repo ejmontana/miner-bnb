@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { injected } from "./wallet/connectors";
 import Web3 from "web3";
@@ -53,19 +53,22 @@ function MyComponent() {
     connect();
   }, []);
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-  const gridContainerStyle = {
-    display: "flex",
-    justifyContent: "center", // Centraliza horizontalmente
-    alignItems: "center", // Centraliza verticalmente
-    height: "80vh", // Isso faz com que o contêiner ocupe a altura total da janela
+  const primeraSeccionRef = useRef(null);
+  const segundaSeccionRef = useRef(null);
+
+  const handleScrollToPrimeraSeccion = () => {
+    if (primeraSeccionRef.current) {
+      primeraSeccionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
+
+  const handleScrollToSegundaSeccion = () => {
+    if (segundaSeccionRef.current) {
+      segundaSeccionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+ 
   return (
     <>
       <AppBar position="static">
@@ -83,32 +86,129 @@ function MyComponent() {
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
-      <Container fixed>
-        <div style={gridContainerStyle}>
+      <Container fixed ref={primeraSeccionRef}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "70vh",
+          }}
+        >
           <Grid container spacing={3}>
             <Grid item xs={4}>
-              <img src={img1} alt="turtle miner" style={{ width: "100%", height: "386px", paddingLeft: '120px' }} />
+              <img
+                src={img1}
+                alt="turtle miner"
+                style={{ width: "100%", height: "386px", paddingLeft: "120px" }}
+              />
             </Grid>
-            <Grid item xs={6} style={{paddingLeft: '120px'}}>
+            <Grid item xs={6} style={{ paddingLeft: "120px" }}>
               <Paper style={{ padding: "16px", height: "22rem" }}>
-              <center>
-
-                <h1>Trutle Miner</h1>
+                <center>
+                  <h1>Trutle Miner</h1>
                 </center>
-                <h2>
-                  {" "}
-                  🥚 ¿Quieres ser parte de la acción? <br /> Es fácil:
-                  <br /> 
+                <h3>
+                  <button onClick={handleScrollToSegundaSeccion}>
+                    Ir a la Segunda Sección
+                  </button>
+                  <br />
                   🐣 Eclosiona tus huevos y genera Miners.
                   <br />
                   💰 Vende tus huevos por BNB.
                   <br />
                   💸 Compra más huevos y acelera tus ganancias.
                   <br />
-                </h2>
+                </h3>
               </Paper>
-           
             </Grid>
+          </Grid>
+        </div>
+      </Container>
+      <Container fixed ref={segundaSeccionRef}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "90vh",
+          }}
+        >
+          <Grid container spacing={3}>
+            <Grid item xs={4}>
+              <Paper style={{ padding: "16px", height: "22rem" }}>
+                <center>
+                  <h1>Comprar Turtle</h1>
+                </center>
+                <h3>
+                  <button onClick={handleScrollToPrimeraSeccion}>
+                    Ir a la Primera Sección
+                  </button>
+                  <br />
+                  🐣 Eclosiona tus huevos y genera Miners.
+                  <br />
+                  💰 Vende tus huevos por BNB.
+                  <br />
+                  💸 Compra más huevos y acelera tus ganancias.
+                  <br />
+                </h3>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={4}>
+              <Paper style={{ padding: "16px", height: "22rem" }}>
+                <center>
+                  <h1>Trutle Miner</h1>
+                </center>
+                <h3>
+                  <br />
+                  🐣 Eclosiona tus huevos y genera Miners.
+                  <br />
+                  💰 Vende tus huevos por BNB.
+                  <br />
+                  💸 Compra más huevos y acelera tus ganancias.
+                  <br />
+                </h3>
+              </Paper>
+            </Grid>
+            <Grid item xs={4}>
+              <Paper style={{ padding: "16px", height: "22rem" }}>
+                <center>
+                  <h1>Trutle Miner</h1>
+                </center>
+                <h3>
+                  <br />
+                  🐣 Eclosiona tus huevos y genera Miners.
+                  <br />
+                  💰 Vende tus huevos por BNB.
+                  <br />
+                  💸 Compra más huevos y acelera tus ganancias.
+                  <br />
+                </h3>
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper  >
+               
+                <center>
+                  <h1>Trutle Miner</h1>
+                </center>
+                <h3>
+                  <button onClick={handleScrollToPrimeraSeccion}>
+                    Ir a la Primera Sección
+                  </button>
+                  <br />
+                  🐣 Eclosiona tus huevos y genera Miners.
+                  <br />
+                  💰 Vende tus huevos por BNB.
+                  <br />
+                  💸 Compra más huevos y acelera tus ganancias.
+                  <br />
+                </h3>
+              </Paper>
+            </Grid>
+
+            
           </Grid>
         </div>
       </Container>
